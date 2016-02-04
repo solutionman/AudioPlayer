@@ -6,6 +6,8 @@ import java.awt.event.*;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.net.URL;
+//import javafx.scene.media.Media;
+//import javafx.scene.media.MediaPlayer;
 
 
 public class AudioPlayer extends JFrame {
@@ -51,10 +53,20 @@ public class AudioPlayer extends JFrame {
 
 
             try {
-                URL url = PlayingEvent.class.getResource("back.wav");
+                //URL url = PlayingEvent.class.getResource("back.wav");
+                URL url = PlayingEvent.class.getResource("runaway.mp3");
                 AudioClip playing = Applet.newAudioClip(url);
                 playing.play();
                 playing.loop();
+
+
+                // this is not working
+                /*
+                String song = "runaway.mp3";
+                Media play = new Media(song);
+                MediaPlayer mediaPlayer = new MediaPlayer(play);
+                mediaPlayer.play();
+                */
 
             } catch (Exception ex) {
 
@@ -66,6 +78,8 @@ public class AudioPlayer extends JFrame {
     public class StoppingEvent implements ActionListener {
         public void actionPerformed(ActionEvent est) {
             playingInfo.setText("Now we suppose stop playing");
+
+
         }
     }
 
@@ -84,6 +98,8 @@ public class AudioPlayer extends JFrame {
 
     }
 }
+
+
 
 
 
