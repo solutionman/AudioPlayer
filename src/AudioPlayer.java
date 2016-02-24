@@ -53,8 +53,8 @@ public class AudioPlayer extends JFrame {
 
 
             try {
-                //URL url = PlayingEvent.class.getResource("back.wav");
-                URL url = PlayingEvent.class.getResource("runaway.mp3");
+                URL url = PlayingEvent.class.getResource("back.wav");
+                //URL url = PlayingEvent.class.getResource("runaway.mp3");
                 AudioClip playing = Applet.newAudioClip(url);
                 playing.play();
                 playing.loop();
