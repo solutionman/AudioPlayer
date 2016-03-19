@@ -22,6 +22,7 @@ public class AudioPlayerFX extends Application {
     public void start(Stage primaryStage) throws Exception {
         playerWindow = primaryStage;
         playerWindow.setTitle("AudioPlayerFX");
+
         playButton = new Button();
         playButton.setText("Play music");
 
@@ -40,7 +41,7 @@ public class AudioPlayerFX extends Application {
         StackPane layout = new StackPane();
         layout.getChildren().addAll(playButton);
 
-        Scene scene = new Scene(layout, 300, 200);
+        Scene scene = new Scene(layout, 400, 200);
         playerWindow.setScene(scene);
         primaryStage.show();
     }
