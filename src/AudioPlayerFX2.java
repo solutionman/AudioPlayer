@@ -26,13 +26,16 @@ public class AudioPlayerFX2 extends Application {
         play = new Button();
         play.setText("Play");
 
-
+        try{
         URL resource = getClass().getResource("back.wav");
         //URL resource = getClass().getResource("work.mp3");
         Media media = new Media(resource.toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
 
+         }catch (Exception e){
+            System.out.println("Something goes wrong");
+        }
 
         StackPane layout = new StackPane();
         layout.getChildren().add(play);
