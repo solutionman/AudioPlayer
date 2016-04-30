@@ -6,8 +6,7 @@ import java.awt.event.*;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.net.URL;
-//import javafx.scene.media.Media;
-//import javafx.scene.media.MediaPlayer;
+
 
 
 public class AudioPlayer extends JFrame {
@@ -40,48 +39,36 @@ public class AudioPlayer extends JFrame {
 
         PlayingEvent e = new PlayingEvent();
         play.addActionListener(e);
+        stop.addActionListener(e);
 
-        StoppingEvent est = new StoppingEvent();
-        stop.addActionListener(est);
-
-        PlaylistEvent ple = new PlaylistEvent();
-        playlist.addActionListener(ple);
     }
 
     public class PlayingEvent implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
 
-            try {
-                URL url = PlayingEvent.class.getResource("back.wav");
-                //URL url = PlayingEvent.class.getResource("runaway.mp3");
-                AudioClip playing = Applet.newAudioClip(url);
+            URL url = PlayingEvent.class.getResource("back.wav");
+            AudioClip playing = Applet.newAudioClip(url);
+
+
+            if(e.getActionCommand().equals("play")){
+                System.out.println("play pressed");
                 playing.play();
-                playing.loop();
-
-
-                // this is not working
-                /*
-                String song = "runaway.mp3";
-                Media play = new Media(song);
-                MediaPlayer mediaPlayer = new MediaPlayer(play);
-                mediaPlayer.play();
-                */
-
-            } catch (Exception ex) {
+                //playing.loop();
+                //playing.stop();
+                playingInfo.setText("back.wav");
 
             }
-            playingInfo.setText("Now we suppose to play something");
-        }
-    }
-
-    public class StoppingEvent implements ActionListener {
-        public void actionPerformed(ActionEvent est) {
-            playingInfo.setText("Now we suppose stop playing");
+            if(e.getActionCommand().equals("stop")){
+                System.out.println("stop pressed");
+                playing.stop();
+            }
 
 
         }
     }
+
+
 
     public class PlaylistEvent implements ActionListener {
         public void actionPerformed(ActionEvent ple) {
@@ -93,15 +80,12 @@ public class AudioPlayer extends JFrame {
         AudioPlayer Core = new AudioPlayer();
         Core.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Core.setSize(400, 200);
+        Core.setResizable(false);
         Core.setVisible(true);
         Core.setTitle("Audio Player");
 
     }
 }
-
-
-
-
 
 
 
