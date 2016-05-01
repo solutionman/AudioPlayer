@@ -44,25 +44,25 @@ public class AudioPlayer extends JFrame {
         PlaylistEvent ex = new PlaylistEvent();
         playlist.addActionListener(ex);
 
+
     }
+
+    URL url = PlayingEvent.class.getResource("back.wav");
+    AudioClip playing = Applet.newAudioClip(url);
+
 
     public class PlayingEvent implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-
-            URL url = PlayingEvent.class.getResource("back.wav");
-            AudioClip playing = Applet.newAudioClip(url);
 
             if(e.getActionCommand().equals("play")){
                 System.out.println("play pressed");
                 playing.play();
                 playingInfo.setText("back.wav");
-
             }
             if(e.getActionCommand().equals("stop")){
                 System.out.println("stop pressed");
                 playing.stop();
             }
-
 
         }
     }
