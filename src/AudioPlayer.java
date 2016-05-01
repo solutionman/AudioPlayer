@@ -17,7 +17,7 @@ public class AudioPlayer extends JFrame {
     public JButton play;
     public JButton stop;
     public JButton playlist;
-
+    public JButton openFile;
 
     public AudioPlayer() {
         setLayout(new FlowLayout());
@@ -37,6 +37,12 @@ public class AudioPlayer extends JFrame {
         playlistInfo = new JLabel("Nothing to show");
         add(playlistInfo);
 
+        openFile = new JButton("openFile");
+        add(openFile);
+
+        OpenFile of = new OpenFile();
+        openFile.addActionListener(of);
+
         PlayingEvent e = new PlayingEvent();
         play.addActionListener(e);
         stop.addActionListener(e);
@@ -44,8 +50,8 @@ public class AudioPlayer extends JFrame {
         PlaylistEvent ex = new PlaylistEvent();
         playlist.addActionListener(ex);
 
-
     }
+
 
     URL url = PlayingEvent.class.getResource("back.wav");
     AudioClip playing = Applet.newAudioClip(url);
