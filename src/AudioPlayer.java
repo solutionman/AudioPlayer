@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.applet.Applet;
 import java.applet.AudioClip;
+import java.io.File;
 import java.net.URL;
 
 public class AudioPlayer extends JFrame {
@@ -64,10 +65,13 @@ public class AudioPlayer extends JFrame {
             ChooseFile.setVisible(true);
             ChooseFile.setDialogTitle("Choose the file/folder you want to play");
 
-            if(of.getSource() == openFile){
-                System.out.println("Button openFile pressed.");
+            int returnValue = ChooseFile.showOpenDialog(null);
+            if(returnValue == JFileChooser.APPROVE_OPTION){
+                File selectedFile = ChooseFile.getSelectedFile();
+                System.out.println(selectedFile.getName());
             }
-            //System.out.println(ChooseFile.getSelectedFile().getAbsolutePath());
+
+            System.out.println(ChooseFile.getSelectedFile().getAbsolutePath());
         }
     }
 
