@@ -1,13 +1,15 @@
 // Audio Player
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.net.URL;
-
-
 
 public class AudioPlayer extends JFrame {
 
@@ -52,10 +54,25 @@ public class AudioPlayer extends JFrame {
 
     }
 
+    public class OpenFile implements ActionListener {
+        public void actionPerformed(ActionEvent of){
+
+            JFileChooser ChooseFile = new JFileChooser();
+            ChooseFile.setCurrentDirectory(new java.io.File("."));
+            //ChooseFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            ChooseFile.setSize(200, 200);
+            ChooseFile.setVisible(true);
+            ChooseFile.setDialogTitle("Choose the file/folder you want to play");
+
+            if(of.getSource() == openFile){
+                System.out.println("Button openFile pressed.");
+            }
+            //System.out.println(ChooseFile.getSelectedFile().getAbsolutePath());
+        }
+    }
 
     URL url = PlayingEvent.class.getResource("back.wav");
     AudioClip playing = Applet.newAudioClip(url);
-
 
     public class PlayingEvent implements ActionListener {
         public void actionPerformed(ActionEvent e) {
@@ -72,7 +89,6 @@ public class AudioPlayer extends JFrame {
 
         }
     }
-
 
     public class PlaylistEvent implements ActionListener {
         public void actionPerformed(ActionEvent ex) {
