@@ -1,14 +1,16 @@
 // Audio Player
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.applet.Applet;
 import java.applet.AudioClip;
+import java.io.File;
 import java.net.URL;
-//import javafx.scene.media.Media;
-//import javafx.scene.media.MediaPlayer;
-
 
 public class AudioPlayer extends JFrame {
 
@@ -18,7 +20,7 @@ public class AudioPlayer extends JFrame {
     public JButton play;
     public JButton stop;
     public JButton playlist;
-
+    public JButton openFile;
 
     public AudioPlayer() {
         setLayout(new FlowLayout());
@@ -38,54 +40,64 @@ public class AudioPlayer extends JFrame {
         playlistInfo = new JLabel("Nothing to show");
         add(playlistInfo);
 
+        openFile = new JButton("openFile");
+        add(openFile);
+
+        OpenFile of = new OpenFile();
+        openFile.addActionListener(of);
+
         PlayingEvent e = new PlayingEvent();
         play.addActionListener(e);
+        stop.addActionListener(e);
 
-        StoppingEvent est = new StoppingEvent();
-        stop.addActionListener(est);
+        PlaylistEvent ex = new PlaylistEvent();
+        playlist.addActionListener(ex);
 
-        PlaylistEvent ple = new PlaylistEvent();
-        playlist.addActionListener(ple);
     }
+
+    public class OpenFile implements ActionListener {
+        public void actionPerformed(ActionEvent of){
+
+            JFileChooser ChooseFile = new JFileChooser();
+            ChooseFile.setCurrentDirectory(new java.io.File("."));
+            //ChooseFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            ChooseFile.setSize(200, 200);
+            ChooseFile.setVisible(true);
+            ChooseFile.setDialogTitle("Choose the file/folder you want to play");
+
+            int returnValue = ChooseFile.showOpenDialog(null);
+            if(returnValue == JFileChooser.APPROVE_OPTION){
+                File selectedFile = ChooseFile.getSelectedFile();
+                System.out.println(selectedFile.getName());
+            }
+
+            System.out.println(ChooseFile.getSelectedFile().getAbsolutePath());
+        }
+    }
+
+    URL url = PlayingEvent.class.getResource("back.wav");
+    AudioClip playing = Applet.newAudioClip(url);
 
     public class PlayingEvent implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
-
-            try {
-                URL url = PlayingEvent.class.getResource("back.wav");
-                //URL url = PlayingEvent.class.getResource("runaway.mp3");
-                AudioClip playing = Applet.newAudioClip(url);
+            if(e.getActionCommand().equals("play")){
+                System.out.println("play pressed");
                 playing.play();
-                playing.loop();
-
-
-                // this is not working
-                /*
-                String song = "runaway.mp3";
-                Media play = new Media(song);
-                MediaPlayer mediaPlayer = new MediaPlayer(play);
-                mediaPlayer.play();
-                */
-
-            } catch (Exception ex) {
-
+                playingInfo.setText("back.wav");
             }
-            playingInfo.setText("Now we suppose to play something");
-        }
-    }
-
-    public class StoppingEvent implements ActionListener {
-        public void actionPerformed(ActionEvent est) {
-            playingInfo.setText("Now we suppose stop playing");
-
+            if(e.getActionCommand().equals("stop")){
+                System.out.println("stop pressed");
+                playing.stop();
+            }
 
         }
     }
 
     public class PlaylistEvent implements ActionListener {
-        public void actionPerformed(ActionEvent ple) {
+        public void actionPerformed(ActionEvent ex) {
             playlistInfo.setText("Here we suppose to see out playlist");
+            System.out.println("playlist button pressed");
         }
     }
 
@@ -93,15 +105,12 @@ public class AudioPlayer extends JFrame {
         AudioPlayer Core = new AudioPlayer();
         Core.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Core.setSize(400, 200);
+        Core.setResizable(false);
         Core.setVisible(true);
         Core.setTitle("Audio Player");
 
     }
 }
-
-
-
-
 
 
 
