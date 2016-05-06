@@ -1,0 +1,11 @@
+/.classpath
+/.idea/
+/.project
+/AudioPlayer$PlayingEvent.class
+/AudioPlayer$PlaylistEvent.class
+/AudioPlayer$StoppingEvent.class
+/AudioPlayer.class
+/AudioPlayer.iml
+/AudioPlayerFX.class
+/AudioPlayerFX2.class
+/out/
