@@ -21,6 +21,8 @@ public class AudioPlayer extends JFrame {
     public JButton stop;
     public JButton playlist;
     public JButton openFile;
+    public String PathToFile;
+    public String FileName;
 
     public AudioPlayer() {
         setLayout(new FlowLayout());
@@ -69,15 +71,22 @@ public class AudioPlayer extends JFrame {
             if(returnValue == JFileChooser.APPROVE_OPTION){
                 File selectedFile = ChooseFile.getSelectedFile();
                 System.out.println(selectedFile.getName());
+                FileName = selectedFile.getName();
             }
 
-            System.out.println(ChooseFile.getSelectedFile().getAbsolutePath());
+            //PathToFile = ChooseFile.getSelectedFile().getAbsolutePath();
+            PathToFile = ChooseFile.getSelectedFile().getPath();
+            System.out.println(PathToFile);
+            System.out.println(FileName);
         }
     }
 
+
+    //URL url = PlayingEvent.class.getResource(FileName);
     URL url = PlayingEvent.class.getResource("back.wav");
     AudioClip playing = Applet.newAudioClip(url);
 
+    
     public class PlayingEvent implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
