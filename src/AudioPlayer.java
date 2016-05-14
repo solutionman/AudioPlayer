@@ -22,7 +22,8 @@ public class AudioPlayer extends JFrame {
     public JButton playlist;
     public JButton openFile;
     public String PathToFile;
-    public String FileName;
+    public String FileName = "";
+
 
     public AudioPlayer() {
         setLayout(new FlowLayout());
@@ -81,7 +82,8 @@ public class AudioPlayer extends JFrame {
         }
     }
 
-
+    //System.out.println(PathToFile);
+    //System.out.println(FileName);
     //URL url = PlayingEvent.class.getResource(FileName);
     URL url = PlayingEvent.class.getResource("back.wav");
     AudioClip playing = Applet.newAudioClip(url);
