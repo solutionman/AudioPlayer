@@ -14,7 +14,8 @@ import java.net.URL;
 
 public class AudioPlayer extends JFrame {
 
-    public JFrame BaseWindow;
+    //public URL url = null;
+	public JFrame BaseWindow;
     public JLabel playingInfo;
     public JLabel playlistInfo;
     public JButton play;
@@ -79,19 +80,22 @@ public class AudioPlayer extends JFrame {
             PathToFile = ChooseFile.getSelectedFile().getPath();
             System.out.println(PathToFile);
             System.out.println(FileName);
+            //URL url = PlayingEvent.class.getResource(FileName);
         }
     }
 
     //System.out.println(PathToFile);
-    //System.out.println(FileName);
+    //System.out.println(FileName);   // Doesn't work here  
     //URL url = PlayingEvent.class.getResource(FileName);
-    URL url = PlayingEvent.class.getResource("back.wav");
+    
+    URL url = PlayingEvent.class.getResource("back.wav");    
     AudioClip playing = Applet.newAudioClip(url);
 
     
     public class PlayingEvent implements ActionListener {
         public void actionPerformed(ActionEvent e) {
 
+        	//System.out.println(FileName);  // here it works
             if(e.getActionCommand().equals("play")){
                 System.out.println("play pressed");
                 playing.play();
