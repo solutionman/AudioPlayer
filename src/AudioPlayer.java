@@ -116,6 +116,7 @@ public class AudioPlayer extends JFrame {
         AudioPlayer Core = new AudioPlayer();
         Core.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Core.setSize(400, 200);
+        Core.setLocationRelativeTo(null);
         Core.setResizable(false);
         Core.setVisible(true);
         Core.setTitle("Audio Player");
