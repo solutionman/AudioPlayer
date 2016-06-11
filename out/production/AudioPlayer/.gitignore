@@ -1,2 +1,9 @@
+/.classpath
 /.idea/
+/.project
+/AudioPlayer$OpenFile.class
+/AudioPlayer$PlayingEvent.class
+/AudioPlayer$PlaylistEvent.class
+/AudioPlayer.class
+/AudioPlayer.iml
 /out/

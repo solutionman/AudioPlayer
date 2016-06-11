@@ -22,7 +22,7 @@ public class AudioPlayer extends JFrame {
     public JButton stop;
     public JButton playlist;
     public JButton openFile;
-    public String PathToFile;
+    public String PathToFile = "";
     public String FileName = "";
 
 
@@ -88,7 +88,11 @@ public class AudioPlayer extends JFrame {
     //System.out.println(FileName);   // Doesn't work here  
     //URL url = PlayingEvent.class.getResource(FileName);
     
-    URL url = PlayingEvent.class.getResource("back.wav");    
+
+    //URL url = PlayingEvent.class.getResource("/home/dima/JavaProjects/Eclipse/AudoPlayer/AudioPlayer/out/production/AudioPlayer/back.wav");
+    //URL url = PlayingEvent.class.getResource(FileName);
+    URL url = PlayingEvent.class.getResource("back.wav");  
+    
     AudioClip playing = Applet.newAudioClip(url);
 
     
