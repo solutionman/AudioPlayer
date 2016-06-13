@@ -95,6 +95,7 @@ public class AudioPlayer extends JFrame {
 			if (e.getActionCommand().equals("play")) {
 				System.out.println("play pressed");
 				System.out.println(FileName);	                    // this works
+				System.out.println(PathToFile);
 				playing.play();
 				playingInfo.setText(FileName);
 			}
@@ -106,9 +107,10 @@ public class AudioPlayer extends JFrame {
 		}
 	}
 
+	//URL url = PlayingEvent.class.getResource();
 	//URL url = PlayingEvent.class.getResource("" + PathToFile + ""); 	
 	URL url = PlayingEvent.class.getResource("" + FileName + ""); 	// this works too
-	// URL url = PlayingEvent.class.getResource("back.wav"); 		// this works
+	//URL url = PlayingEvent.class.getResource("back.wav"); 		// this works
 	AudioClip playing = Applet.newAudioClip(url);
 	
 	public class PlaylistEvent implements ActionListener {
