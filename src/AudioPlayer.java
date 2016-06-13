@@ -13,6 +13,7 @@ import java.applet.AudioClip;
 import java.io.File;
 import java.net.URL;
 
+
 public class AudioPlayer extends JFrame {
 
 	public JFrame BaseWindow;
@@ -23,9 +24,9 @@ public class AudioPlayer extends JFrame {
 	public JButton stop;
 	public JButton playlist;
 	public JButton openFile;
-	public String PathToFile = "";
+	public String PathToFile = "/home/dima/JavaProjects/Eclipse/AudoPlayer/AudioPlayer/out/production/AudioPlayer/back.wav";
 	public String FileName = "back.wav";
-	// public String FileName = "runaway.wav";
+	//public String FileName = "runaway.wav";
 
 	public AudioPlayer() {
 		setLayout(new FlowLayout());
@@ -74,6 +75,7 @@ public class AudioPlayer extends JFrame {
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = ChooseFile.getSelectedFile();
 					FileName = selectedFile.getName();
+					playlistInfo.setText(FileName);
 				}
 
 				PathToFile = ChooseFile.getSelectedFile().getPath();
@@ -85,20 +87,16 @@ public class AudioPlayer extends JFrame {
 		}
 	}
 
-	URL url = PlayingEvent.class.getResource("" + FileName + ""); // this works
-																	// too
-	// URL url = PlayingEvent.class.getResource("back.wav"); // this works
-	AudioClip playing = Applet.newAudioClip(url);
+
 
 	public class PlayingEvent implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
-			System.out.println(FileName); // here it works
-			// System.out.println(PathToFile); // this works too
 			if (e.getActionCommand().equals("play")) {
 				System.out.println("play pressed");
+				System.out.println(FileName);	                    // this works
 				playing.play();
-				playingInfo.setText("back.wav");
+				playingInfo.setText(FileName);
 			}
 			if (e.getActionCommand().equals("stop")) {
 				System.out.println("stop pressed");
@@ -108,6 +106,11 @@ public class AudioPlayer extends JFrame {
 		}
 	}
 
+	//URL url = PlayingEvent.class.getResource("" + PathToFile + ""); 	
+	URL url = PlayingEvent.class.getResource("" + FileName + ""); 	// this works too
+	// URL url = PlayingEvent.class.getResource("back.wav"); 		// this works
+	AudioClip playing = Applet.newAudioClip(url);
+	
 	public class PlaylistEvent implements ActionListener {
 		public void actionPerformed(ActionEvent ex) {
 			playlistInfo.setText("Here we suppose to see out playlist");
@@ -125,9 +128,8 @@ public class AudioPlayer extends JFrame {
 		Core.setTitle("Audio Player");
 
 	}
+	
 }
-
-
 
 
 
