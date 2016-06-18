@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +14,6 @@ import java.applet.Applet;
 import java.applet.AudioClip;
 import java.io.File;
 import java.net.URL;
-
 
 public class AudioPlayer extends JFrame {
 
@@ -26,13 +27,15 @@ public class AudioPlayer extends JFrame {
 	public JButton openFile;
 	public String PathToFile = "/home/dima/JavaProjects/Eclipse/AudoPlayer/AudioPlayer/out/production/AudioPlayer/back.wav";
 	public String FileName = "back.wav";
-	//public String FileName = "runaway.wav";
+	// public String FileName = "runaway.wav";
 
 	public AudioPlayer() {
 		setLayout(new FlowLayout());
 
 		playingInfo = new JLabel("Silent for now");
 		add(playingInfo);
+		playingInfo.setOpaque(false);
+		playingInfo.setForeground(Color.green);
 
 		play = new JButton("play");
 		add(play);
@@ -75,47 +78,52 @@ public class AudioPlayer extends JFrame {
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = ChooseFile.getSelectedFile();
 					FileName = selectedFile.getName();
-					playlistInfo.setText(FileName);
+					playlistInfo.setText("Now we got something: " + FileName);
+					playlistInfo.setForeground(Color.BLUE);
 				}
 
 				PathToFile = ChooseFile.getSelectedFile().getPath();
 
 			} catch (Exception e) {
 				System.out.println("Choose song");
+				playlistInfo.setText("Choose File, Idiot!");
+				playlistInfo.setForeground(Color.RED);
 			}
 
 		}
 	}
-
-
 
 	public class PlayingEvent implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getActionCommand().equals("play")) {
 				System.out.println("play pressed");
-				System.out.println(FileName);	                    // this works
+				System.out.println(FileName); // this works
 				System.out.println(PathToFile);
 				playing.play();
 				playingInfo.setText(FileName);
+				playingInfo.setForeground(Color.BLUE);
 			}
 			if (e.getActionCommand().equals("stop")) {
 				System.out.println("stop pressed");
 				playing.stop();
+				playingInfo.setText("Stop");
+				playingInfo.setForeground(Color.MAGENTA);
 			}
 
 		}
 	}
 
-	//URL url = PlayingEvent.class.getResource();
-	//URL url = PlayingEvent.class.getResource("" + PathToFile + ""); 	
-	URL url = PlayingEvent.class.getResource("" + FileName + ""); 	// this works too
-	//URL url = PlayingEvent.class.getResource("back.wav"); 		// this works
+	// URL url = PlayingEvent.class.getResource();
+	// URL url = PlayingEvent.class.getResource("" + PathToFile + "");
+	URL url = PlayingEvent.class.getResource("" + FileName + ""); // this works too
+	// URL url = PlayingEvent.class.getResource("back.wav"); // this works
 	AudioClip playing = Applet.newAudioClip(url);
-	
+
 	public class PlaylistEvent implements ActionListener {
 		public void actionPerformed(ActionEvent ex) {
 			playlistInfo.setText("Here we suppose to see out playlist");
+			playlistInfo.setForeground(Color.BLACK);
 			System.out.println("playlist button pressed");
 		}
 	}
@@ -126,11 +134,12 @@ public class AudioPlayer extends JFrame {
 		Core.setSize(400, 200);
 		Core.setLocationRelativeTo(null);
 		Core.setResizable(false);
+		Core.setBackground(Color.BLACK);                          // not working, why?
 		Core.setVisible(true);
 		Core.setTitle("Audio Player");
 
 	}
-	
+
 }
 
 
